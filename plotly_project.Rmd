@@ -11,13 +11,13 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Code
 
-Through this code we try to plot the closing prices of major European stock indices in the years of 1991 to 1998.
+Contains the daily closing prices of major European stock indices: Germany DAX (Ibis), Switzerland SMI, France CAC, and UK FTSE. The data are sampled in business time, i.e., weekends and holidays are omitted.
 
 ```{r, echo=TRUE, eval=FALSE}
 library(plotly)
 library(tidyr)
 library(dplyr)
-data("UsStockMarkets")
+data("EuStockMarkets")
 stocks <- as.data.frame(EuStockMarkets) %>%
   gather(index, price) %>%
   mutate(time = rep(time(EuStockMarkets), 4))
