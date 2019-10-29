@@ -1,0 +1,27 @@
+---
+title: "Ploty Project"
+author: "Yelco"
+date: "29/10/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Code
+
+Through this code we try to plot the closing prices of major European stock indices in the years of 1991 to 1998.
+
+```{r, echo=TRUE, eval=FALSE}
+library(plotly)
+library(tidyr)
+library(dplyr)
+data("UsStockMarkets")
+stocks <- as.data.frame(EuStockMarkets) %>%
+  gather(index, price) %>%
+  mutate(time = rep(time(EuStockMarkets), 4))
+plot_ly(stocks, x = ~time, y = ~price, color = ~index, mode = "lines")
+```
+
+
