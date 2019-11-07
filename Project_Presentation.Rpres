@@ -1,0 +1,33 @@
+
+Developing Data Products : Week 3 Assignment 
+========================================================
+author: Yelco Martinez
+date: October 2019
+autosize: true
+
+R Markdown Presentation & Plotly
+========================================================
+
+Through this code we try to plot the closing prices of major European stock indices in the years of 1991 to 1998.
+
+Slide With Code
+========================================================
+
+```{r}
+library(plotly)
+library(tidyr)
+library(dplyr)
+data("EuStockMarkets")
+stocks <- as.data.frame(EuStockMarkets) %>%
+  gather(index, price) %>%
+  mutate(time = rep(time(EuStockMarkets), 4))
+```
+
+Slide With Plot
+========================================================
+
+```{r, echo=FALSE}
+p=plot_ly(stocks, x = ~time, y = ~price, color = ~index, mode = "lines")
+htmlwidgets::saveWidget(as.widget(p), file = "demo.html")
+```
+<iframe src="demo.html" style="position:absolute;height:100%;width:100%"></iframe>
